@@ -26,10 +26,15 @@ class Gossip
 		return Gossip.all[id-1]
 	end
 
-	def self.update(id, content)
-		lines = File.readlines("./db/gossip.csv")
-		lines[params[id]] = "#{params["gossip_author"]},content"  << $/
-		File.open('./db/gossip.csv', 'w') { |f| f.write(lines.join) }
+	def self.update(id, author, content)
+		rows_array = CSV.read("./db/gossip.csv")
+		rows_array.each_with_index do |line, i|
+			if (i + 1) == id.to_i
+				line[0] = author
+				line[1] = content
+			end
+		end
+			CSV.open("./db/gossip.csv", 'wb') { |csv| rows_array.each{|row| csv << row}}
 	end
 
 end
