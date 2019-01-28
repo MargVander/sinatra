@@ -6,7 +6,7 @@
     <h1>Éditer un potin</h1>
     <p>Édite ton potin via le formulaire ci-dessous</p>
     <form action='/gossips/new/' method='POST'>
-      Réécris ton potin : <input type='text' name='new_text'/><br/>
+      Réécris ton potin : <input value="<%= gossip.content %>" type='text' name='new_text'/>
       <input type='submit'/>
     </form>
   </body>
